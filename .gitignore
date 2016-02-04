@@ -1,0 +1,17 @@
+# Intellij
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Maven
+target/
+
+# Tests
+FORK_DIRECTORY_*
+
+# JRebel
+rebel.xml
+
+# Log Files
+*.log
