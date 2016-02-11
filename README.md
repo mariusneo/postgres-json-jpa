@@ -38,12 +38,31 @@ WITH (
 ```
 
 
+## Incovenients
+ 
+The main inconvenient in using JSON fields seen in this project is that the json fields can not be queried
+(at least when using hibernate as JPA provider) via JPQL queries.
+The support of Postgres for JSON fields being considered specific (most of the other database engines don't deal
+with JSON/JSONB fields) lead to not having introduced direct support for it in JPA.
+
+This PoC there should give an idea on how to store generic data in a single table by using JSON fields, 
+but it seems clear that, in order to query the data, native (Postgres specific) SQL should be used.
+
+
 
 ## Similar projects 
 
 - https://github.com/brant-hwang/springboot-postgresql94-hibernate5-example.git
-- https://github.com/sasa7812/psql-cache-evict-POC.git
+- https://github.com/sasa7812/psql-cache-evict-POC.git     
 
+psql-cache-evict-POC project (via eclipselink JPA provider) offers the possibility to execute queries
+related to JSON fields :
+
+```
+        String jpql = "SELECT c FROM Course c where SQL('course_mapped ->> ''?'' = ''Second one''',c.name) ";
+```
+
+On the other hand, hibernate JPA provider doesn't support such constructs.
 
 
 ## Environment requirements
